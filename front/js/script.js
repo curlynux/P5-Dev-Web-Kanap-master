@@ -1,13 +1,21 @@
 var section = document.getElementById("items");
 var link = document.getElementsByClassName("items").items.childNodes[1];
-var i = 0;
 var id = document.getElementById("");
+var data = (url) => fetch(url)
+.then((res) => res.json())
+.then((data) => 
+{
+    var j = 0;
+    while(j <= 8)
+    {
+        console.log(data[j++]);
+    }
+});
 
-var data = url => fetch(url)
-.then(res => res.json())
-.then(data => console.log(data));
+
 data("http://localhost:3000/api/products");
 
+var i = 0;
 while (i <= 7)
 {
     i++;
