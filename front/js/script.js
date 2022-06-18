@@ -5,8 +5,8 @@ var data = (url) => fetch(url)
 .then((response) => response.json())
 .then((data) => 
 {
-    var i = 1;
-    while(i <= 8)
+    var i = 0;
+    while(i < 9)
     {
         var a = document.createElement("a");
         var article = document.createElement("article");
@@ -14,8 +14,8 @@ var data = (url) => fetch(url)
         var h3 = document.createElement("h3");
         var p = document.createElement("p");
     
-        a.setAttribute("href", "./product.html");
-        article.setAttribute("id", data[i]._id)
+        a.href = `./product.html?=${data[i]._id}`;
+        article.id = data[i]._id;
         img.setAttribute("src", data[i].imageUrl);
         img.alt = data[i].altTxt;
         h3.classList.add("productName");
@@ -31,8 +31,8 @@ var data = (url) => fetch(url)
         article.appendChild(p);
         section.appendChild(a);
         console.log(data[i++]);
+        console.log(i)
     }
 });
 
 data("http://localhost:3000/api/products");
-
