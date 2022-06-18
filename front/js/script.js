@@ -36,3 +36,4 @@ var data = (url) => fetch(url)
 });
 
 data("http://localhost:3000/api/products");
+module.exports = data();
