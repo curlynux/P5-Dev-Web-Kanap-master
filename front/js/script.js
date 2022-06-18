@@ -14,14 +14,17 @@ var data = (url) => fetch(url)
         var h3 = document.createElement("h3");
         var p = document.createElement("p");
     
-        section.appendChild(a);
         a.setAttribute("href", "./product.html");
         article.setAttribute("id", data[i]._id)
         img.setAttribute("src", data[i].imageUrl);
+
         h3.classList.add("productName");
         p.classList.add("productDescription");
+
         h3.innerText = data[i].name;
         p.innerText = data[i].description;
+
+        section.appendChild(a);
         a.appendChild(article);
         article.appendChild(img);
         article.appendChild(h3);
