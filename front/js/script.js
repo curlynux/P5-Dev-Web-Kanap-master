@@ -17,7 +17,7 @@ var data = (url) => fetch(url)
         a.setAttribute("href", "./product.html");
         article.setAttribute("id", data[i]._id)
         img.setAttribute("src", data[i].imageUrl);
-
+        img.alt = data[i].altTxt;
         h3.classList.add("productName");
         p.classList.add("productDescription");
 
