@@ -19,11 +19,11 @@ while (i <= 7)
 
     section.appendChild(a);
     a.setAttribute("href", "./product.html");
-    img.setAttribute("src", "../../back/images/kanap0" + i + ".jpeg");
+    img.setAttribute("src", "http://localhost:3000/images/kanap0"  + i + ".jpeg");
     h3.classList.add("productName");
-    h3.innerText = "text head" + i;
+    h3.innerText = "text";
     p.classList.add("productDescription");
-    p.innerText = "description" + i; 
+    p.innerText = "text";
     a.appendChild(article);
     article.appendChild(img);
     article.appendChild(h3);
