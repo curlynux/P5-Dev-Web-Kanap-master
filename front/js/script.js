@@ -16,7 +16,8 @@ var data = (url) => fetch(url)
     
         section.appendChild(a);
         a.setAttribute("href", "./product.html");
-        img.setAttribute("src", "http://localhost:3000/images/kanap0"  + i + ".jpeg");
+        article.setAttribute("id", data[i]._id)
+        img.setAttribute("src", data[i].imageUrl);
         h3.classList.add("productName");
         p.classList.add("productDescription");
         h3.innerText = data[i].name;
