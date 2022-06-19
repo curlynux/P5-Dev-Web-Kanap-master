@@ -1,12 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const productCtrl = require('../controllers/product');
-const data = require("../../front/js/script");
 
 router.get('/', productCtrl.getAllProducts);
 router.get('/:id', productCtrl.getOneProduct);
 router.post('/order', productCtrl.orderProducts);
-
-console.log(30);
-console.log(data);
 module.exports = router;
+
+var data = url => console.log(url);
+data("http://127.0.0.1:5500/front/html/product.html?id=42");
