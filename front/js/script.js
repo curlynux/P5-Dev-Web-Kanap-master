@@ -1,3 +1,5 @@
+const { log } = require("console");
+
 var section = document.getElementById("items");
 var link = document.getElementsByClassName("items").items.childNodes[1];
 var id = document.getElementById("");
@@ -31,9 +33,11 @@ var data = (url) => fetch(url)
         article.appendChild(p);
         section.appendChild(a);
         console.log(data[i++]);
-        console.log(i)
+        a.addEventListener("click", () => 
+            document.location.href = a.href);
+
+        
     }
 });
 
 data("http://localhost:3000/api/products");
-console.log("curlynux")
