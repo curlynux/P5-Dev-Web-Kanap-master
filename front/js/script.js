@@ -30,11 +30,8 @@ var data = (url) => fetch(url)
         article.appendChild(h3);
         article.appendChild(p);
         section.appendChild(a);
-        console.log(data[i++]);
         a.addEventListener("click", () => 
             document.location.href = a.href);
-
-        
     }
 });
 
