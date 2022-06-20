@@ -15,8 +15,8 @@ var data = (url) => fetch(url)
         var p = document.createElement("p");
     
         a.setAttribute("href", `./product.html?id=${data[i]._id}`)
-        img.setAttribute("src", data[i].imageUrl);
         article.id = data[i]._id;
+        img.setAttribute("src", data[i].imageUrl);
         img.alt = data[i].altTxt;
         h3.classList.add("productName");
         p.classList.add("productDescription");
@@ -30,8 +30,11 @@ var data = (url) => fetch(url)
         article.appendChild(h3);
         article.appendChild(p);
         section.appendChild(a);
+        console.log(data[i++]);
         a.addEventListener("click", () => 
             document.location.href = a.href);
+
+        
     }
 });
 
