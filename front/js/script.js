@@ -30,13 +30,9 @@ var data = (url) => fetch(url)
         article.appendChild(h3);
         article.appendChild(p);
         section.appendChild(a);
-        console.log(data[i++]);
         a.addEventListener("click", () => 
             document.location.href = a.href);
-
-        
     }
 });
 
 data("http://localhost:3000/api/products");
-export function data();
