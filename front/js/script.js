@@ -1,5 +1,3 @@
-const { log } = require("console");
-
 var section = document.getElementById("items");
 var link = document.getElementsByClassName("items").items.childNodes[1];
 var id = document.getElementById("");
@@ -8,7 +6,7 @@ var data = (url) => fetch(url)
 .then((data) => 
 {
     var i = 0;
-    while(i < 9)
+    while(i < data.length)
     {
         var a = document.createElement("a");
         var article = document.createElement("article");
@@ -16,7 +14,7 @@ var data = (url) => fetch(url)
         var h3 = document.createElement("h3");
         var p = document.createElement("p");
     
-        a.href = `./product.html?=${data[i]._id}`;
+        a.setAttribute("href", `./product.html?id=${data[i]._id}`)
         article.id = data[i]._id;
         img.setAttribute("src", data[i].imageUrl);
         img.alt = data[i].altTxt;
@@ -41,3 +39,4 @@ var data = (url) => fetch(url)
 });
 
 data("http://localhost:3000/api/products");
+export function data();
