@@ -32,6 +32,7 @@ var data = (url) => fetch(url)
         section.appendChild(a);
         a.addEventListener("click", () => 
             document.location.href = a.href);
+            
     }
 });
 
