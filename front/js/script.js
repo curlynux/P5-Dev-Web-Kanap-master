@@ -6,7 +6,7 @@ var data = (url) => fetch(url)
 .then((data) => 
 {
     var i = 0;
-    while(i < data.length)
+    while(i < data.length, i++)
     {
         var a = document.createElement("a");
         var article = document.createElement("article");
