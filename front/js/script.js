@@ -33,8 +33,12 @@ var kanap = async (url) =>
         section.appendChild(a);
         a.addEventListener("click", () => {
             document.location.href = a.href;
+            this.addEventListener("storage", () => 
+            {
+                localStorage.setItem("id", JSON.stringify(data[i]._id));
+            });
         });
-       localStorage.setItem("id", JSON.stringify(data[i]._id));
+        console.log(localStorage);
         console.log(data[i].name);
         i++;
     }
