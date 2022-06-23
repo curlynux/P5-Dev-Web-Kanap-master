@@ -31,13 +31,13 @@ var kanap = async (url) =>
         article.appendChild(h3);
         article.appendChild(p);
         section.appendChild(a);
+
+        var id = article.getAttribute("id");
+
         a.addEventListener("click", () => {
             document.location.href = a.href;
-            this.addEventListener("storage", () => 
-            {
-                localStorage.setItem("id", JSON.stringify(data[i]._id));
-            });
         });
+        localStorage.setItem("data", JSON.stringify(data));
         console.log(localStorage);
         console.log(data[i].name);
         i++;
