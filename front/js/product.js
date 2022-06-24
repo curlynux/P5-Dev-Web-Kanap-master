@@ -5,25 +5,22 @@ var h1  = document.getElementById("title");
 var p   = document.getElementById("price");
 var des = document.getElementById("description");
 var title = document.getElementsByTagName("title");
+var url = window.location.href;
+var id = url.substring(url.indexOf("=") + 1);
 
 
-p.textContent = data[0].price;
-h1.textContent = data[0].name;
-des.textContent = data[0].description;
-title.textContent = data[0].name
-console.log("title");
+
 var i = 0;
 while(i < data.length)
 {
     i++;
-
-    console.log(data[i].imageUrl);
-    console.log(img[5]);
-    console.log(h1);
-    console.log(p);
-    console.log(des);
-
+    if(id === data[i]._id)
+    {
+        p.textContent = data[i].price;
+        h1.textContent = data[i].name;
+        des.textContent = data[i].description;
+        title.textContent = data[i].name;
+        img[5].src = data[i].imageUrl
+        console.log(data[i])
+    }
 }
-
-console.log(img[5].src);
-console.log(window.location.search);

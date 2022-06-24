@@ -36,9 +36,9 @@ var kanap = async (url) =>
 
         a.addEventListener("click", () => {
             document.location.href = a.href;
+            console.log(article._id)
         });
         localStorage.setItem("data", JSON.stringify(data));
-        console.log(localStorage);
         console.log(data[i].name);
         i++;
     }
