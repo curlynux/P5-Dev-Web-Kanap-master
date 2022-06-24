@@ -21,11 +21,16 @@ while(i < data.length)
         title[0].innerHTML = data[i].name;
         img[5].src = data[i].imageUrl;
         img[5].alt = data[i].altTxt;
-        
-        console.log(colors);
-        option.value = data[i].colors[2];
-        colors.appendChild(option);
         colors.children[1].innerHTML = data[i].colors[1]
+        
+        var j = 0;
+        while(j < colors.length)
+        {
+            j++;
+            colors.appendChild(option);
+            option.innerHTML = data[j].colors[2];
+        }
+        console.log(colors);
         console.log(data[i]);
     }
     ++i;
