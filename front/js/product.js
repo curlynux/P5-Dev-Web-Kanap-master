@@ -19,8 +19,9 @@ while(i < data.length)
         p.textContent = data[i].price;
         h1.textContent = data[i].name;
         des.textContent = data[i].description;
-        title.textContent = data[i].name;
+        title[0].innerHTML = data[i].name;
         img[5].src = data[i].imageUrl
         console.log(data[i])
     }
+    console.log(title);
 }
