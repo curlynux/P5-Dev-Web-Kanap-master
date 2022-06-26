@@ -1,5 +1,4 @@
 var data = JSON.parse(localStorage.getItem("data"));
-
 var img = document.getElementsByTagName("img");
 var h1  = document.getElementById("title");
 var p   = document.getElementById("price");

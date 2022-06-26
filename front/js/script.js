@@ -5,7 +5,7 @@ var kanap = async (url) =>
 {
     var response = await fetch(url);
     var data = await response.json();
-
+console.log(data);
     var i = 0;
     while(i < data.length)
     {
