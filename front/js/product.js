@@ -32,13 +32,20 @@ while(i < data.length)
             colors[2].innerHTML = data[i].colors[1];
         }
         
-        if(data[i].colors.length >= 2)
+        if(data[i].colors.length > 2)
         {
             colors.appendChild(option);
-            colors.appendChild(option.cloneNode(true));
-            colors[3].text = data[i].colors[2];
-            colors[4].text = data[7].colors[3];
+            colors[3].innerHTML = data[i].colors[2];
         } 
+
+        if(data[i].colors.length >= 3)
+        {
+            colors.appendChild(option.cloneNode(true));
+            colors[4].innerHTML = data[i].colors[3];
+        }
+
+        if(colors[4].value === "undefined")
+            colors[4].remove();
         
     }
     ++i;
