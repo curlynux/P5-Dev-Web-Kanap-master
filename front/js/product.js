@@ -12,6 +12,7 @@ var option = document.createElement("option");
 var i = 0;
 while(i < data.length)
 {
+        
     if(id === data[i]._id)
     {
         p.textContent = data[i].price;
@@ -20,17 +21,21 @@ while(i < data.length)
         title[0].innerHTML = data[i].name;
         img[5].src = data[i].imageUrl;
         img[5].alt = data[i].altTxt;
-        colors.children[1].innerHTML = data[i].colors[1]
         
-        var j = 0;
-        while(j < colors.length)
-        {
-            j++;
-            colors.appendChild(option);
-            option.innerHTML = data[j].colors[2];
-        }
-        console.log(colors);
         console.log(data[i]);
+        var item = data[i];
+        localStorage.setItem("item", JSON.stringify(data[i]));
+        
+        if (colors.length <= 3)
+        {
+            colors[1].innerHTML = data[i].colors[0];
+            colors[2].innerHTML = data[i].colors[1];
+        }
+
+        colors.appendChild(option);
+        colors.appendChild(option.cloneNode(true));
+        option.text = data[i].colors[2]
+        option[4].text = data[i].colors[3]
     }
     ++i;
 }
