@@ -31,11 +31,15 @@ while(i < data.length)
             colors[1].innerHTML = data[i].colors[0];
             colors[2].innerHTML = data[i].colors[1];
         }
-
-        colors.appendChild(option);
-        colors.appendChild(option.cloneNode(true));
-        option.text = data[i].colors[2]
-        option[4].text = data[i].colors[3]
+        
+        if(data[i].colors.length >= 2)
+        {
+            colors.appendChild(option);
+            colors.appendChild(option.cloneNode(true));
+            colors[3].text = data[i].colors[2];
+            colors[4].text = data[7].colors[3];
+        } 
+        
     }
     ++i;
 }
