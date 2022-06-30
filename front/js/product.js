@@ -10,6 +10,7 @@ var colors = document.getElementById("colors");
 var option = document.createElement("option");
 var quant = document.getElementById("quantity");
 var button = document.getElementById("addToCart");
+var cart = {};
 
 console.log(button);
 colors.addEventListener("change", () => 
@@ -20,8 +21,10 @@ colors.addEventListener("change", () =>
 });
 
 quant.addEventListener("change", () => 
+{
+    console.log(quant.value)
     localStorage.setItem("quantity", quant.value)
-);
+});
 
 
 var i = 0;
@@ -32,7 +35,6 @@ while(i < data.length)
     
     if(id === data[i]._id)
     {
-        var cart = {};
         button.addEventListener("click", () => 
         {
             cart.image = data[i].imageUrl;
@@ -56,7 +58,6 @@ while(i < data.length)
         img[5].alt = data[i].altTxt;
         
         console.log(data[i]);
-        localStorage.setItem("item", JSON.stringify(data[i]));
         
         if (colors.length <= 3)
         {
