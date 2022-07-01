@@ -39,7 +39,6 @@ console.log(data);
             console.log(article._id)
         });
         localStorage.setItem("data", JSON.stringify(data));
-        console.log(data[i].name);
         i++;
     }
 }
