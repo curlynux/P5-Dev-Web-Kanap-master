@@ -14,7 +14,9 @@ var afficherProduit = (data) =>
     var colors = document.getElementById("colors");
     var button = document.getElementById("addToCart");
     var img = document.createElement("img");
-    
+    var quantite = document.getElementById("quantity").value;
+    var couleur = document.getElementById("colors").value;
+    var arr = [id, couleur, quantite];
     img.setAttribute("src", data.imageUrl);
     img.alt = data.altTxt;
     div_img.appendChild(img);
@@ -35,12 +37,11 @@ var afficherProduit = (data) =>
 var cart = JSON.parse(localStorage.getItem("cart"));
 
 var AjouterPanier = () => {
-    var quantite = document.getElementById("quantity").value;
-    var couleur = document.getElementById("colors").value;
+    
+    
+    arr.push(cart);
 
-    var array = [id, couleur, quantite]
-    cart.push(array);
-    localStorage.setItem("cart", JSON.stringify(array));
+    localStorage.setItem("cart", JSON.stringify(arr));
 }
 console.log(id);
 console.log(url);
