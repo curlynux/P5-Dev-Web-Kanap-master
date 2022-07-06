@@ -1,5 +1,6 @@
 var url = window.location.href;
 var id = url.split("=")[1];
+
 fetch(`http://localhost:3000/api/products/${id}`)
 .then((response) => response.json())
 .then((kanap) => afficherProduit(kanap))
@@ -14,9 +15,7 @@ var afficherProduit = (data) =>
     var colors = document.getElementById("colors");
     var button = document.getElementById("addToCart");
     var img = document.createElement("img");
-    var quantite = document.getElementById("quantity").value;
-    var couleur = document.getElementById("colors").value;
-    var arr = [id, couleur, quantite];
+    
     img.setAttribute("src", data.imageUrl);
     img.alt = data.altTxt;
     div_img.appendChild(img);
@@ -34,14 +33,40 @@ var afficherProduit = (data) =>
     button.addEventListener("click", AjouterPanier);
 
 }
-var cart = JSON.parse(localStorage.getItem("cart"));
 
-var AjouterPanier = () => {
+var AjouterPanier = () => 
+{
+    var quantite = parseInt(document.getElementById("quantity").value);
     
-    
-    arr.push(cart);
+    var couleur = document.getElementById("colors").value;
+    var array = [id, couleur, quantite];
+    var cart = JSON.parse(localStorage.getItem("cart"));
+    if(cart === undefined || cart === null)
+    {
+        cart = [];
+    }
+    var index = 0;
+    var ok = false;
+    cart.forEach(element => 
+        {
+            index++;
+            if (element[0] === id && !ok)
+            {
+                ok = true;
+                if (couleur === element[1])
+                {
+                    element[2] = quantite + parseInt(element[2]);
+                    
+                } else
+                {
+                    cart.splice(index, 0, array)
+                }
 
-    localStorage.setItem("cart", JSON.stringify(arr));
+            }
+        });
+  
+    if(!ok)
+        cart.push(array);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    
 }
-console.log(id);
-console.log(url);
