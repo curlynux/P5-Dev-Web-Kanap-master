@@ -8,7 +8,13 @@ var cart = JSON.parse(localStorage.getItem("cart"));
 var couleur = JSON.parse(localStorage.getItem("color"));
 var quant = JSON.parse(localStorage.getItem("quantity"));
 var quantity = document.getElementsByClassName("itemQuantity")[0];
-
+fetch("http://localhost:3000/api/products")
+.then(res => res.json())
+.then(data => afficherPanier(data));
+var afficherPanier = (article) => 
+{
+    console.log(article);
+}
 quantity.addEventListener("change", () => 
 {
     console.log(quant.value)
@@ -24,3 +30,4 @@ if (quant > 1)
     prix.innerHTML = `${item.price} €`;
 quantity.value = quant;
 console.log(cart);
+
