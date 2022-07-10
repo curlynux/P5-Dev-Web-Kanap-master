@@ -30,4 +30,4 @@ var afficherPanier = (data) =>
     color.innerHTML = data.colors[0];
     prix.innerHTML = data.price + " €";
 }
-console.log(cart);
+console.log(cart[0][0]);
