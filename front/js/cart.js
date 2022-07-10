@@ -23,11 +23,29 @@ fetch(`http://localhost:3000/api/products`)
 var afficherPanier = (data) => 
 {
     console.log(data);
-    img[5].setAttribute("src", "test");
+    
 
     img.src = data.imageUrl;
     h2.innerHTML = data.name;
     color.innerHTML = data.colors[0];
     prix.innerHTML = data.price + " €";
 }
-console.log(cart[0][0]);
+
+// data.forEach(elem => 
+// {
+//     console.log(elem);
+// });
+
+cart.forEach(item => 
+{
+    data.forEach(elem => {
+    if(item[0] === elem._id)
+    {
+        img[5].src = elem.imageUrl;
+        console.log(elem.imageUrl);
+    }  
+    console.log(item[0]);
+    });
+}); 
+
+ 

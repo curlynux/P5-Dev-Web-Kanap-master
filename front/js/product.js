@@ -37,7 +37,7 @@ var afficherProduit = (data) =>
 var AjouterPanier = () => 
 {
     var quantite = parseInt(document.getElementById("quantity").value);
-    
+    console.log("ajouter");
     var couleur = document.getElementById("colors").value;
     var array = [id, couleur, quantite];
     var cart = JSON.parse(localStorage.getItem("cart"));
