@@ -10,9 +10,17 @@ var section = document.getElementById("cart__items");
 var article = document.createElement("article");
 var div = document.createElement("div");
 var img5 = document.createElement("img");
+var artiClone = article.cloneNode(true);
+var divClone = div.cloneNode(true);
 
 article.setAttribute("class", "cart__item");
 section.appendChild(article);
+
+artiClone.setAttribute("class", "cart__item");
+divClone.appendChild(img5);
+section.appendChild(artiClone);
+divClone.setAttribute("class", "cart__item__img");
+artiClone.appendChild(divClone);
 div.setAttribute("class", "cart__item__img")
 div.appendChild(img5);
 article.appendChild(div);
