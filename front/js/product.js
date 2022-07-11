@@ -46,13 +46,15 @@ var AjouterPanier = () =>
     
     divBtn.style.flexDirection = "column";
     divBtn.style.fontWeight = "bold";
+
     notif.style.display = "flex";
     notif.style.justifyContent = "center";
     notif.style.alignSelf = "center";
+    notif.textContent = "un element ajouter au panier";
+
     button.style.display = "flex";
     button.style.justifyContent = "center";
     button.style.alignSelf = "center";
-    notif.textContent = "un element ajouter au panier";
     divBtn.appendChild(notif);
     
     divBtn.styl
