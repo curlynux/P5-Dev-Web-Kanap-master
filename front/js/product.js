@@ -5,6 +5,7 @@ fetch(`http://localhost:3000/api/products/${id}`)
 .then((response) => response.json())
 .then((kanap) => afficherProduit(kanap))
 
+var button = document.getElementById("addToCart");
 var afficherProduit = (data) =>
 {
     console.log(data);
@@ -13,7 +14,6 @@ var afficherProduit = (data) =>
     var p   = document.getElementById("price");
     var des = document.getElementById("description");
     var colors = document.getElementById("colors");
-    var button = document.getElementById("addToCart");
     var img = document.createElement("img");
     
     img.setAttribute("src", data.imageUrl);
@@ -41,6 +41,26 @@ var AjouterPanier = () =>
     var couleur = document.getElementById("colors").value;
     var array = [id, couleur, quantite];
     var cart = JSON.parse(localStorage.getItem("cart"));
+    var divBtn = document.getElementsByClassName("item__content__addButton")[0];
+    var notif = document.createElement("p");
+    
+    divBtn.style.flexDirection = "column";
+    divBtn.style.fontWeight = "bold";
+    notif.style.display = "flex";
+    notif.style.justifyContent = "center";
+    notif.style.alignSelf = "center";
+    button.style.display = "flex";
+    button.style.justifyContent = "center";
+    button.style.alignSelf = "center";
+    notif.textContent = "un element ajouter au panier";
+    divBtn.appendChild(notif);
+    
+    divBtn.styl
+    setTimeout(() => 
+    {
+        notif.remove();
+
+    }, "3000");
     if(cart === undefined || cart === null)
     {
         cart = [];
