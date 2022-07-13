@@ -1,7 +1,7 @@
 var data = JSON.parse(localStorage.getItem("data"));
 var img = document.getElementsByTagName("img");
 var item = JSON.parse(localStorage.getItem("item"));
-var h2 = document.getElementsByTagName("h2")[0];
+
 var color = document.getElementsByTagName("p")[0];
 var prix = document.getElementsByTagName("p")[1];
 var cart = JSON.parse(localStorage.getItem("cart"));
@@ -10,6 +10,7 @@ var section = document.getElementById("cart__items");
 var article = document.createElement("article");
 var div = document.createElement("div");
 var img5 = document.createElement("img");
+
 var artiClone = article.cloneNode(true);
 var divClone = div.cloneNode(true);
 var imgClone = img5.cloneNode(true);
@@ -19,12 +20,15 @@ var h2 = document.createElement("h2");
 var color = document.createElement("p");
 var prix = document.createElement("p");
 var divContentClone = divContent.cloneNode(true);
+
 var divQuant = document.createElement("div");
 var divQuantChild = document.createElement("div");
 var pQuant = document.createElement("p");
 var input = document.createElement("input");
 var divDelete = document.createElement("div");
 var divDeletetext = document.createElement("p");
+
+
 div.className = "cart__item__img";
 div.appendChild(img5);
 article.appendChild(div);
@@ -59,7 +63,7 @@ input.setAttribute("type", "number");
 input.name = "itemQuantity";
 input.min = 1;
 input.max = 100;
-input.value = 10;
+input.value = 11;
 divDelete.appendChild(divDeletetext);
 article.appendChild(divDelete);
 
@@ -69,9 +73,6 @@ fetch(`http://localhost:3000/api/products`)
 var afficherPanier = (data) => 
 {
     console.log(data);
-        
-
-    
 }
 
 cart.forEach(item => 
