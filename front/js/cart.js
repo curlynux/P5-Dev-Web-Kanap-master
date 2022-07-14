@@ -64,8 +64,11 @@ input.name = "itemQuantity";
 input.min = 1;
 input.max = 100;
 input.value = 11;
+divDelete.className = "cart__item__content__settings__delete";
+divDeletetext.innerHTML = "supprimer"
 divDelete.appendChild(divDeletetext);
 article.appendChild(divDelete);
+
 
 fetch(`http://localhost:3000/api/products`)
 .then(res => res.json())
