@@ -93,6 +93,10 @@ var afficherPanier = (data) =>
             article.setAttribute("data-id", elem._id);
             article.setAttribute("data-color", couleur)
             input.value = inputQuant;
+            if (cart.length >= 1)
+            {
+                
+            }
         }  
         });
     });
