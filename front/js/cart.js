@@ -64,7 +64,6 @@ input.setAttribute("type", "number");
 input.name = "itemQuantity";
 input.min = 1;
 input.max = 100;
-input.value = 11;
 
 divDelete.className = "cart__item__content__settings__delete";
 divDeletetext.innerHTML = "supprimer"
@@ -76,30 +75,25 @@ fetch(`http://localhost:3000/api/products`)
 .then(data => afficherPanier(data));
 var afficherPanier = (data) => 
 {
-    console.log("test");
-}
-
-var i = 0;
-cart.forEach(item => 
-{
-    data.forEach(elem => {
-    if(item[0] === elem._id)
+    var i = 0;
+    cart.forEach(item => 
     {
-        var couleur = cart[i][1]
-        img[5].src = elem.imageUrl;
-        img[6].src = elem.imageUrl;
-        h2.innerHTML = elem.name;
-        color.innerHTML = cart[i][1];
-        console.log(cart[i]);
-        console.log(cart[i][1]);
-        console.log(cart);
-        i++;
-        prix.innerHTML = `${elem.price} €`
-        pQuant.innerHTML = "Qté : ";
-        article.setAttribute("data-id", elem._id);
-        article.setAttribute("data-color", couleur)
-    }  
+        data.forEach(elem => {
+        if(item[0] === elem._id)
+        {
+            var couleur = cart[i][1];
+            var inputQuant = cart[i][2];
+            img[5].src = elem.imageUrl;
+            img[6].src = elem.imageUrl;
+            h2.innerHTML = elem.name;
+            color.innerHTML = cart[i][1];
+            i++;
+            prix.innerHTML = `${elem.price} €`
+            pQuant.innerHTML = "Qté : ";
+            article.setAttribute("data-id", elem._id);
+            article.setAttribute("data-color", couleur)
+            input.value = inputQuant;
+        }  
+        });
     });
-}); 
-
- 
+}
