@@ -5,7 +5,7 @@ var item = JSON.parse(localStorage.getItem("item"));
 var color = document.getElementsByTagName("p")[0];
 var prix = document.getElementsByTagName("p")[1];
 var cart = JSON.parse(localStorage.getItem("cart"));
-var color = JSON.parse(localStorage.getItem("color"));
+
 var section = document.getElementById("cart__items");
 var article = document.createElement("article");
 var divImg = document.createElement("div");
@@ -38,13 +38,9 @@ divImg.className = "cart__item__img";
 divImg.appendChild(img5);
 article.appendChild(divImg);
 
-
-
-
 divClone.className = "cart__item__img";
 divClone.appendChild(imgClone);
 artiClone.appendChild(divClone);
-console.log(divImg);
 
 divContent.className = "cart__item__content";
 article.appendChild(divContent);
@@ -80,20 +76,28 @@ fetch(`http://localhost:3000/api/products`)
 .then(data => afficherPanier(data));
 var afficherPanier = (data) => 
 {
-    console.log(data);
+    console.log("test");
 }
 
+var i = 0;
 cart.forEach(item => 
 {
     data.forEach(elem => {
     if(item[0] === elem._id)
     {
+        var couleur = cart[i][1]
         img[5].src = elem.imageUrl;
         img[6].src = elem.imageUrl;
         h2.innerHTML = elem.name;
-        color.innerHTML = elem.colors;
+        color.innerHTML = cart[i][1];
+        console.log(cart[i]);
+        console.log(cart[i][1]);
+        console.log(cart);
+        i++;
         prix.innerHTML = `${elem.price} €`
         pQuant.innerHTML = "Qté : ";
+        article.setAttribute("data-id", elem._id);
+        article.setAttribute("data-color", couleur)
     }  
     });
 }); 
