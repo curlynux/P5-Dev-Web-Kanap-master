@@ -34,12 +34,14 @@ var afficherPanier = (data) =>
         var h2 = document.createElement("h2");
         var prix = document.createElement("p");
         var color = document.createElement("p");
+
         var divSettings = document.createElement("div");
         var divQuantChild = document.createElement("div");
         var pQuant = document.createElement("p");
         var input = document.createElement("input");
         var divDelete = document.createElement("div");
         var divDeletetext = document.createElement("p");
+        
 
         section.appendChild(article);
         article.className = "cart__item";
@@ -65,7 +67,6 @@ var afficherPanier = (data) =>
 
         divSettings.className = "cart__item__content__settings";
         divQuantChild.className = "cart__item__content__settings__quantity";
-        input.className = "itemQuantity";
         divContent.appendChild(divSettings);
         divSettings.appendChild(divQuantChild);
         divQuantChild.appendChild(pQuant);
@@ -87,7 +88,6 @@ var afficherPanier = (data) =>
             {
                 
                 var couleur = cart[i][1];
-                var inputQuant = cart[i][2];
                 var totalQuantity = document.getElementById("totalQuantity");
                 var totalPrice = document.getElementById("totalPrice");
                 var quantity = cart[i][2];
@@ -97,28 +97,31 @@ var afficherPanier = (data) =>
                 img.setAttribute("alt", elem.altTxt);
                 h2.innerHTML = elem.name;
                 color.innerHTML = cart[i][1];
-                input.addEventListener("change", () => 
-                {
-                    item[2] = input.value;
-                    console.log(`new quantity: ${item[2]}`);
-                    console.log(`id: ${item[0]}`);
-                    if(input.value = input.value -1)
-                    {
-                        var newTotal = totalPrice.outerText 
-                        totalPrice.textContent = totalPrice.outerText - input.value;
-                    }
-                }); 
-                
                 i++;
                 prix.innerHTML = `${elem.price} €`
                 pQuant.innerHTML = "Qté : ";
                 article.dataset.id = elem._id;
                 article.dataset.color = couleur;
-                input.value = inputQuant;
+                input.value = quantity;
                 totalQuantity.innerHTML = cart.length;
-
-                totalPrice.innerHTML = elem.price * quantity
+                input.addEventListener("change", () => 
+                {
+                    totalItem();
+                    quantity = input.value;
+                    totalPrice.innerHTML = elem.price * quantity;
+                })
+                totalPrice.innerHTML = elem.price * quantity;
             }
         });
     });
+}
+
+function totalItem()
+{
+    var sum = 0;
+    cart.forEach(item => 
+    {
+        sum += item[2]
+    });
+    console.log(sum);
 }
