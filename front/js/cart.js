@@ -125,3 +125,14 @@ function totalItem()
     });
     console.log(sum);
 }
+
+function deleteItem()
+{
+    var deleteButton = document.getElementsByClassName("deleteItem");
+    var article = document.getElementsByClassName("cart__item");
+    for(btn of deleteButton)
+    {
+        console.log(btn);
+    }
+}
+deleteItem();
