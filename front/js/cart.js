@@ -96,25 +96,23 @@ var afficherPanier = (data) =>
                 var totalPrice = document.getElementById("totalPrice");
                 var totalArticle = document.getElementById("totalQuantity");
 
-                sumPrice = sumPrice + elem.price * quantity;
+                sumPrice += elem.price * quantity;
                 totalPrice.innerHTML = sumPrice;
                 input.addEventListener("change", () => 
                 {
                     totalPrice.innerHTML = sumPrice;
                     if(input.value = input.value++)
                     {
-                        sumPrice = sumPrice + elem.price * quantity;
+                        sumPrice += elem.price * quantity;
                         totalPrice.innerHTML = sumPrice;
                         console.log(input.value);
+                        console.log(sumPrice);
                     }
                     
-                    // if(input.value = input.value--)
-                    // {
-                    //     sumPrice = sumPrice + elem.price - quantity;
-                    //     totalPrice.innerHTML = sumPrice;
-                    //     console.log(input.value);
-                    // }
-                    console.log(sumPrice);
+                    if(input.value = input.value--)
+                    {
+                        console.log(input.value);
+                    }
                     
                 });
                 totalArticle.innerHTML = cart.length
