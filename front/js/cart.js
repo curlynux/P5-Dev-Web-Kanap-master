@@ -6,6 +6,7 @@ var Data = fetch(`http://localhost:3000/api/products`)
     .then(data => 
         {
             afficherPanier(data)
+            // deleteItem();
             return data;
         });
         
@@ -15,6 +16,8 @@ var afficherPanier = (data) =>
 {
     
     var i = 0;
+    var sumPrice = 0;
+
     cart.forEach(item => 
     {
         var color = document.getElementsByTagName("p")[0];
@@ -60,6 +63,7 @@ var afficherPanier = (data) =>
         article.appendChild(divContent);
         divDesc.className = "cart__item__content__description";
 
+
         divContent.appendChild(divDesc);
         divDesc.appendChild(h2);
         divDesc.appendChild(color);
@@ -88,11 +92,33 @@ var afficherPanier = (data) =>
             {
                 
                 var couleur = cart[i][1];
-                var totalQuantity = document.getElementById("totalQuantity");
-                var totalPrice = document.getElementById("totalPrice");
                 var quantity = cart[i][2];
+                var totalPrice = document.getElementById("totalPrice");
+                var totalArticle = document.getElementById("totalQuantity");
 
-                img.src = elem.imageUrl;
+                sumPrice = sumPrice + elem.price * quantity;
+                totalPrice.innerHTML = sumPrice;
+                input.addEventListener("change", () => 
+                {
+                    totalPrice.innerHTML = sumPrice;
+                    if(input.value = input.value++)
+                    {
+                        sumPrice = sumPrice + elem.price * quantity;
+                        totalPrice.innerHTML = sumPrice;
+                        console.log(input.value);
+                    }
+                    
+                    // if(input.value = input.value--)
+                    // {
+                    //     sumPrice = sumPrice + elem.price - quantity;
+                    //     totalPrice.innerHTML = sumPrice;
+                    //     console.log(input.value);
+                    // }
+                    console.log(sumPrice);
+                    
+                });
+                totalArticle.innerHTML = cart.length
+
                 img.src = elem.imageUrl;
                 img.setAttribute("alt", elem.altTxt);
                 h2.innerHTML = elem.name;
@@ -103,36 +129,26 @@ var afficherPanier = (data) =>
                 article.dataset.id = elem._id;
                 article.dataset.color = couleur;
                 input.value = quantity;
-                totalQuantity.innerHTML = cart.length;
-                input.addEventListener("change", () => 
-                {
-                    totalItem();
-                    quantity = input.value;
-                    totalPrice.innerHTML = elem.price * quantity;
-                })
-                totalPrice.innerHTML = elem.price * quantity;
+
             }
         });
     });
 }
 
-function totalItem()
-{
-    var sum = 0;
-    cart.forEach(item => 
-    {
-        sum += item[2]
-    });
-    console.log(sum);
-}
 
-function deleteItem()
-{
-    var deleteButton = document.getElementsByClassName("deleteItem");
-    var article = document.getElementsByClassName("cart__item");
-    for(btn of deleteButton)
-    {
-        console.log(btn);
-    }
-}
-deleteItem();
+// function deleteItem()
+// {
+//     var deleteButton = document.getElementsByClassName("deleteItem");
+//     var article = document.getElementsByClassName("cart__item");
+//     var i = 0;
+//     for(item in cart)
+//     {
+//         for(btn of deleteButton)
+//         {
+//             btn.addEventListener("click", () => 
+//             {
+                
+//             });
+//         }
+//     }
+// }
