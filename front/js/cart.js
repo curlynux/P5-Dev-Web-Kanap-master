@@ -1,12 +1,14 @@
 var section = document.getElementById("cart__items");
 var cart = JSON.parse(localStorage.getItem("cart"));
 var data = JSON.parse(localStorage.getItem("data"));
+var sumPrice = 0;
 var Data = fetch(`http://localhost:3000/api/products`)
 .then(res => res.json())
     .then(data => 
         {
             afficherPanier(data)
-            // deleteItem();
+            deleteItem();
+            updateQuantity();
             return data;
         });
         
@@ -16,8 +18,6 @@ var afficherPanier = (data) =>
 {
     
     var i = 0;
-    var sumPrice = 0;
-
     cart.forEach(item => 
     {
         var color = document.getElementsByTagName("p")[0];
@@ -37,14 +37,13 @@ var afficherPanier = (data) =>
         var h2 = document.createElement("h2");
         var prix = document.createElement("p");
         var color = document.createElement("p");
-
+        
         var divSettings = document.createElement("div");
         var divQuantChild = document.createElement("div");
         var pQuant = document.createElement("p");
         var input = document.createElement("input");
         var divDelete = document.createElement("div");
         var divDeletetext = document.createElement("p");
-        
 
         section.appendChild(article);
         article.className = "cart__item";
@@ -98,24 +97,8 @@ var afficherPanier = (data) =>
 
                 sumPrice += elem.price * quantity;
                 totalPrice.innerHTML = sumPrice;
-                input.addEventListener("change", () => 
-                {
-                    totalPrice.innerHTML = sumPrice;
-                    if(input.value = input.value++)
-                    {
-                        sumPrice += elem.price * quantity;
-                        totalPrice.innerHTML = sumPrice;
-                        console.log(input.value);
-                        console.log(sumPrice);
-                    }
-                    
-                    if(input.value = input.value--)
-                    {
-                        console.log(input.value);
-                    }
-                    
-                });
-                totalArticle.innerHTML = cart.length
+                
+                totalArticle.innerHTML = cart.length;
 
                 img.src = elem.imageUrl;
                 img.setAttribute("alt", elem.altTxt);
@@ -127,26 +110,48 @@ var afficherPanier = (data) =>
                 article.dataset.id = elem._id;
                 article.dataset.color = couleur;
                 input.value = quantity;
-
+                
             }
+            
         });
     });
 }
 
 
-// function deleteItem()
-// {
-//     var deleteButton = document.getElementsByClassName("deleteItem");
-//     var article = document.getElementsByClassName("cart__item");
-//     var i = 0;
-//     for(item in cart)
-//     {
-//         for(btn of deleteButton)
-//         {
-//             btn.addEventListener("click", () => 
-//             {
-                
-//             });
-//         }
-//     }
-// }
+function deleteItem()
+{
+    var deleteButton = document.getElementsByClassName("deleteItem");
+    var article = document.getElementsByClassName("cart__item");
+    
+    var j = 0
+    cart.forEach(item => 
+    {
+        for(elem of article)
+        {
+            if(elem.dataset.id === item[0])
+            {
+                elem.children[1].children[2].childNodes[0]
+                .addEventListener("click", () => 
+                {
+                    console.log(cart);
+                    var newCart = [];
+                    newCart.push(cart);
+                    cart.splice(cart[j], 1);
+                    elem.remove()
+                    location.reload();                  
+                    console.log(newCart);
+                    localStorage.setItem("cart", JSON.stringify(cart));
+                    console.log(cart[j]);
+                    j++;
+                });
+            }
+        }
+    })
+}
+
+function updateQuantity()
+{
+    var article = document.getElementsByClassName("cart__item");
+    var input = document.getElementsByClassName("itemQuantity");
+    
+}
