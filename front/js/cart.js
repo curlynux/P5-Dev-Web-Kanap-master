@@ -7,8 +7,9 @@ var Data = fetch(`http://localhost:3000/api/products`)
     .then(data => 
         {
             afficherPanier(data)
+           deleEmptyArticle();
             updateQuantity();
-            old_deleteItem();
+            deleteItem();
             return data;
         });
         
@@ -88,7 +89,6 @@ var afficherPanier = (data) =>
         divDeletetext.className = "deleteItem";
         divDeletetext.innerHTML = "supprimer";
         divDelete.appendChild(divDeletetext);
-        // divDeletetext.addEventListener("click", () => deleteItem(index))
         data.forEach(elem => {
             if(item[0] === elem._id)
             {
@@ -104,23 +104,23 @@ var afficherPanier = (data) =>
                 totalArticle.innerHTML = cart.length;
 
                 input.addEventListener("change", () => 
-            {
-                // if(input.value = input.value++)
-                // {
-                //     sumPrice = sumPrice + elem.price * quantity;
-                //     sumPrice += elem.price * quantity;
-                //     totalPrice.innerHTML = sumPrice;
-                //     console.log(input.value);
-                //     console.log(sumPrice);
-                // }
-            
-                if(input.value = input.value--)
                 {
-                    sumPrice = sumPrice - elem.price - quantity;
-                    totalPrice.innerHTML = sumPrice;
-                    console.log(input.value);
-                }
-            })
+                    // if(input.value = input.value++)
+                    // {
+                    //     sumPrice = sumPrice + elem.price * quantity;
+                    //     sumPrice += elem.price * quantity;
+                    //     totalPrice.innerHTML = sumPrice;
+                    //     console.log(input.value);
+                    //     console.log(sumPrice);
+                    // }
+                
+                    if(input.value = input.value--)
+                    {
+                        sumPrice = sumPrice - elem.price - quantity;
+                        totalPrice.innerHTML = sumPrice;
+                        console.log(input.value);
+                    }
+                });
                 img.src = elem.imageUrl;
                 img.setAttribute("alt", elem.altTxt);
                 h2.innerHTML = elem.name;
@@ -137,24 +137,35 @@ var afficherPanier = (data) =>
             
             
         });
-    index++;
-    // console.log(index);
     }); 
 
 }
 
+function deleEmptyArticle()
+{
+    // var i = 0;
+    var article = document.getElementsByClassName("cart__item")
+    for(item of article)
+    {
+        if(item.children[0].children[0].src.length === 0)
+            item.remove();
+        // article[item].children[1].children[2].childNodes[0]
+        // .addEventListener("click", () => console.log("test"))
+        console.log();
+    }
+}
 
-function old_deleteItem()
+function deleteItem()
 {
     var deleteButton = document.getElementsByClassName("deleteItem");
     var article = document.getElementsByClassName("cart__item");
     
+    var j = 0;
     cart.forEach(item => 
     {
-        var j = 0;
-
         for(elem of article)
         {
+            
             if(elem.dataset.id === item[0])
             {
                 elem.children[1].children[2].childNodes[0]
@@ -170,39 +181,18 @@ function old_deleteItem()
                         // location.reload();                  
                         // console.log(newCart);
                         // localStorage.setItem("cart", JSON.stringify(cart));
-                        console.log(j);
-                        
+                        // console.log(j);
+                        var container = [...elem.parentElement.children]
+                        container.forEach((item, index) => item.addEventListener("click", () => console.log(index)));
+                        j++;                 
                     // }
-                }); j++;
+                });
             }
-            
         }
-        
     })
 }
-
-// function deleteItem(index) 
-// {
-//     alert(index)
-//     if(confirm("do you wanna really delete this article ?"))
-//     {
-//         console.log(cart);
-//         var newCart = [];
-//         newCart.push(cart);
-//         cart.splice(cart[index], 1);
-        
-//         console.log(newCart);
-//         localStorage.setItem("cart", JSON.stringify(cart));
-//         console.log(cart[index]);
-//         location.reload();                  
-        
-        
-//     }
-// }
-
 function updateQuantity()
 {
     var article = document.getElementsByClassName("cart__item");
     var input = document.getElementsByClassName("itemQuantity");
-    
 }
