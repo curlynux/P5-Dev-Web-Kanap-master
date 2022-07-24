@@ -7,8 +7,8 @@ var Data = fetch(`http://localhost:3000/api/products`)
     .then(data => 
         {
             afficherPanier(data)
-            deleteItem();
             updateQuantity();
+            old_deleteItem();
             return data;
         });
         
@@ -18,6 +18,7 @@ var afficherPanier = (data) =>
 {
     
     var i = 0;
+    var index = 0;
     cart.forEach(item => 
     {
         var color = document.getElementsByTagName("p")[0];
@@ -44,7 +45,7 @@ var afficherPanier = (data) =>
         var input = document.createElement("input");
         var divDelete = document.createElement("div");
         var divDeletetext = document.createElement("p");
-
+        
         section.appendChild(article);
         article.className = "cart__item";
         artiClone.className = "cart__item";
@@ -77,6 +78,7 @@ var afficherPanier = (data) =>
         divContent.appendChild(divDelete);
 
         input.setAttribute("type", "number");
+        
         input.name = "itemQuantity";
         input.className = "itemQuantity";
         input.min = 1;
@@ -86,6 +88,7 @@ var afficherPanier = (data) =>
         divDeletetext.className = "deleteItem";
         divDeletetext.innerHTML = "supprimer";
         divDelete.appendChild(divDeletetext);
+        // divDeletetext.addEventListener("click", () => deleteItem(index))
         data.forEach(elem => {
             if(item[0] === elem._id)
             {
@@ -110,22 +113,39 @@ var afficherPanier = (data) =>
                 article.dataset.id = elem._id;
                 article.dataset.color = couleur;
                 input.value = quantity;
-                
             }
-            
+        // if(input.value = input.value++)
+            // {
+            //     sumPrice = sumPrice + elem.price * quantity;
+            //     sumPrice += elem.price * quantity;
+            //     totalPrice.innerHTML = sumPrice;
+            //     console.log(input.value);
+            //     console.log(sumPrice);
+            // }
+
+            if(input.value = input.value--)
+            {
+                sumPrice = sumPrice + elem.price - quantity;
+                totalPrice.innerHTML = sumPrice;
+                console.log(input.value);
+            }
         });
-    });
+    index++;
+    // console.log(index);
+    }); 
+
 }
 
 
-function deleteItem()
+function old_deleteItem()
 {
     var deleteButton = document.getElementsByClassName("deleteItem");
     var article = document.getElementsByClassName("cart__item");
     
-    var j = 0
     cart.forEach(item => 
     {
+        var j = 0;
+
         for(elem of article)
         {
             if(elem.dataset.id === item[0])
@@ -133,21 +153,45 @@ function deleteItem()
                 elem.children[1].children[2].childNodes[0]
                 .addEventListener("click", () => 
                 {
-                    console.log(cart);
-                    var newCart = [];
-                    newCart.push(cart);
-                    cart.splice(cart[j], 1);
-                    elem.remove()
-                    location.reload();                  
-                    console.log(newCart);
-                    localStorage.setItem("cart", JSON.stringify(cart));
-                    console.log(cart[j]);
-                    j++;
-                });
+                    // if(confirm("do you wanna really delete this article ?"))
+                    // {
+                        // console.log(cart);
+                        // var newCart = [];
+                        // newCart.push(cart);
+                        // cart.splice(cart[j], 1);
+                        // elem.remove()
+                        // location.reload();                  
+                        // console.log(newCart);
+                        // localStorage.setItem("cart", JSON.stringify(cart));
+                        console.log(j);
+                        
+                    // }
+                }); j++;
             }
+            
         }
+        
     })
 }
+
+// function deleteItem(index) 
+// {
+//     alert(index)
+//     if(confirm("do you wanna really delete this article ?"))
+//     {
+//         console.log(cart);
+//         var newCart = [];
+//         newCart.push(cart);
+//         cart.splice(cart[index], 1);
+        
+//         console.log(newCart);
+//         localStorage.setItem("cart", JSON.stringify(cart));
+//         console.log(cart[index]);
+//         location.reload();                  
+        
+        
+//     }
+// }
 
 function updateQuantity()
 {
