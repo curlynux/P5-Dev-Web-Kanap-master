@@ -103,6 +103,24 @@ var afficherPanier = (data) =>
                 
                 totalArticle.innerHTML = cart.length;
 
+                input.addEventListener("change", () => 
+            {
+                // if(input.value = input.value++)
+                // {
+                //     sumPrice = sumPrice + elem.price * quantity;
+                //     sumPrice += elem.price * quantity;
+                //     totalPrice.innerHTML = sumPrice;
+                //     console.log(input.value);
+                //     console.log(sumPrice);
+                // }
+            
+                if(input.value = input.value--)
+                {
+                    sumPrice = sumPrice - elem.price - quantity;
+                    totalPrice.innerHTML = sumPrice;
+                    console.log(input.value);
+                }
+            })
                 img.src = elem.imageUrl;
                 img.setAttribute("alt", elem.altTxt);
                 h2.innerHTML = elem.name;
@@ -114,21 +132,10 @@ var afficherPanier = (data) =>
                 article.dataset.color = couleur;
                 input.value = quantity;
             }
-        // if(input.value = input.value++)
-            // {
-            //     sumPrice = sumPrice + elem.price * quantity;
-            //     sumPrice += elem.price * quantity;
-            //     totalPrice.innerHTML = sumPrice;
-            //     console.log(input.value);
-            //     console.log(sumPrice);
-            // }
+        
 
-            if(input.value = input.value--)
-            {
-                sumPrice = sumPrice + elem.price - quantity;
-                totalPrice.innerHTML = sumPrice;
-                console.log(input.value);
-            }
+            
+            
         });
     index++;
     // console.log(index);
