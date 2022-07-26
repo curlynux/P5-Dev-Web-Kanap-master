@@ -166,12 +166,21 @@ function deleteItem()
 
     array.forEach((item, index) => 
     {
+        var id = item.parentElement.parentElement.parentElement.dataset.id
         item.addEventListener("click", () => 
         {
             cart.forEach(elem =>
             {
-                if(item.parentElement.parentElement.parentElement.dataset.id === elem[0])
+                if(id === elem[0])
+                {
+                    console.log(cart);
+                    cart.splice(elem, 1);
+                    location.reload();
+                    console.log(cart);
+                    localStorage.setItem("cart", JSON.stringify(cart))
                     console.log(index, elem[0]);
+                    console.log(cart);
+                }
             });
         })
     });
