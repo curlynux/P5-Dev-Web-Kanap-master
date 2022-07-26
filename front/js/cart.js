@@ -159,37 +159,23 @@ function deleteItem()
 {
     var deleteButton = document.getElementsByClassName("deleteItem");
     var article = document.getElementsByClassName("cart__item");
+
     
-    var j = 0;
-    cart.forEach(item => 
+
+    var array = [...deleteButton]
+
+    array.forEach((item, index) => 
     {
-        for(elem of article)
+        item.addEventListener("click", () => 
         {
-            
-            if(elem.dataset.id === item[0])
+            cart.forEach(elem =>
             {
-                elem.children[1].children[2].childNodes[0]
-                .addEventListener("click", () => 
-                {
-                    // if(confirm("do you wanna really delete this article ?"))
-                    // {
-                        // console.log(cart);
-                        // var newCart = [];
-                        // newCart.push(cart);
-                        // cart.splice(cart[j], 1);
-                        // elem.remove()
-                        // location.reload();                  
-                        // console.log(newCart);
-                        // localStorage.setItem("cart", JSON.stringify(cart));
-                        // console.log(j);
-                        var container = [...elem.parentElement.children]
-                        container.forEach((item, index) => item.addEventListener("click", () => console.log(index)));
-                        j++;                 
-                    // }
-                });
-            }
-        }
-    })
+                if(item.parentElement.parentElement.parentElement.dataset.id === elem[0])
+                    console.log(index, elem[0]);
+            });
+        })
+    });
+        
 }
 function updateQuantity()
 {
