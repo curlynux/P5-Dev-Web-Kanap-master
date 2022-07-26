@@ -1,0 +1,14 @@
+{
+	if(confirm("do you wanna really delete this article ?"))
+	{
+	console.log(cart);
+	var newCart = [];
+	newCart.push(cart);
+	cart.splice(cart[j], 1);
+	elem.remove()
+	location.reload();                  
+	console.log(newCart);
+	localStorage.setItem("cart", JSON.stringify(cart));
+	console.log(j);
+	}
+}
