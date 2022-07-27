@@ -10,6 +10,7 @@ var Data = fetch(`http://localhost:3000/api/products`)
            deleEmptyArticle();
             updateQuantity();
             deleteItem();
+            addTotalArticle();
             return data;
         });  
 // var log = () => Data.then(a => console.log(a));
@@ -18,7 +19,6 @@ var afficherPanier = (data) =>
 {
     
     var i = 0;
-    var index = 0;
     cart.forEach(item => 
     {
         var color = document.getElementsByTagName("p")[0];
@@ -95,12 +95,9 @@ var afficherPanier = (data) =>
                 var couleur = cart[i][1];
                 var quantity = cart[i][2];
                 var totalPrice = document.getElementById("totalPrice");
-                var totalArticle = document.getElementById("totalQuantity");
 
                 sumPrice += elem.price * quantity;
                 totalPrice.innerHTML = sumPrice;
-                
-                totalArticle.innerHTML = cart.length;
 
                 input.addEventListener("change", () => 
                 {
@@ -113,12 +110,12 @@ var afficherPanier = (data) =>
                     //     console.log(sumPrice);
                     // }
                 
-                    if(input.value = input.value--)
-                    {
-                        sumPrice = sumPrice - elem.price - quantity;
-                        totalPrice.innerHTML = sumPrice;
-                        console.log(input.value);
-                    }
+                    // if(input.value = input.value--)
+                    // {
+                    //     sumPrice = sumPrice - elem.price - quantity;
+                    //     totalPrice.innerHTML = sumPrice;
+                    //     console.log(input.value);
+                    // }
                 });
                 img.src = elem.imageUrl;
                 img.setAttribute("alt", elem.altTxt);
@@ -131,10 +128,6 @@ var afficherPanier = (data) =>
                 article.dataset.color = couleur;
                 input.value = quantity;
             }
-        
-
-            
-            
         });
     }); 
 
@@ -142,14 +135,11 @@ var afficherPanier = (data) =>
 
 function deleEmptyArticle()
 {
-    // var i = 0;
     var article = document.getElementsByClassName("cart__item")
     for(item of article)
     {
         if(item.children[0].children[0].src.length === 0)
             item.remove();
-        // article[item].children[1].children[2].childNodes[0]
-        // .addEventListener("click", () => console.log("test"))
         console.log();
     }
 }
@@ -157,10 +147,6 @@ function deleEmptyArticle()
 function deleteItem()
 {
     var deleteButton = document.getElementsByClassName("deleteItem");
-    var article = document.getElementsByClassName("cart__item");
-
-    
-
     var array = [...deleteButton]
 
     array.forEach((item, index) => 
@@ -183,8 +169,18 @@ function deleteItem()
     });
         
 }
+
 function updateQuantity()
 {
     var article = document.getElementsByClassName("cart__item");
     var input = document.getElementsByClassName("itemQuantity");
+}
+
+function addTotalArticle()
+{
+    var sumQuantity = 0;
+    var totalArticle = document.getElementById("totalQuantity");
+
+    cart.forEach(elem => sumQuantity += elem[2])
+    totalArticle.innerHTML = sumQuantity;    
 }
