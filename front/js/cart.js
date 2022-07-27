@@ -11,8 +11,7 @@ var Data = fetch(`http://localhost:3000/api/products`)
             updateQuantity();
             deleteItem();
             return data;
-        });
-        
+        });  
 // var log = () => Data.then(a => console.log(a));
 
 var afficherPanier = (data) => 
@@ -174,11 +173,9 @@ function deleteItem()
                 if(id === elem[0])
                 {
                     console.log(cart);
-                    cart.splice(elem, 1);
-                    location.reload();
-                    console.log(cart);
+                    console.log(cart.splice(index, 1));
                     localStorage.setItem("cart", JSON.stringify(cart))
-                    console.log(index, elem[0]);
+                    location.reload()
                     console.log(cart);
                 }
             });
