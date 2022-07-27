@@ -97,18 +97,18 @@ var afficherPanier = (data) =>
 
                 input.addEventListener("change", () => 
                 {
-                    if(Number(input.value) > quantity)
+                    if(input.value > quantity)
                     {
                         item[2] = parseInt(input.value);
-                        console.log(item);
+                        console.log(input.value, item);
                         sumPrice += elem.price * quantity;
                         totalPrice.innerHTML = sumPrice;
                         addTotalArticle();
                     }
-                    if(Number(input.value) < quantity)
+                    else
                     {
                         item[2] = parseInt(input.value);
-                        console.log(item);
+                        console.log(input.value, item);
                         sumPrice -= elem.price - quantity;
                         totalPrice.innerHTML = sumPrice;
                         addTotalArticle();
