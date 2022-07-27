@@ -83,7 +83,6 @@ var afficherPanier = (data) =>
         input.className = "itemQuantity";
         input.min = 1;
         input.max = 100;
-
         divDelete.className = "cart__item__content__settings__delete";
         divDeletetext.className = "deleteItem";
         divDeletetext.innerHTML = "supprimer";
@@ -96,27 +95,27 @@ var afficherPanier = (data) =>
                 var quantity = cart[i][2];
                 var totalPrice = document.getElementById("totalPrice");
 
-                sumPrice += elem.price * quantity;
-                totalPrice.innerHTML = sumPrice;
-
                 input.addEventListener("change", () => 
                 {
-                    // if(input.value = input.value++)
-                    // {
-                    //     sumPrice = sumPrice + elem.price * quantity;
-                    //     sumPrice += elem.price * quantity;
-                    //     totalPrice.innerHTML = sumPrice;
-                    //     console.log(input.value);
-                    //     console.log(sumPrice);
-                    // }
-                
-                    // if(input.value = input.value--)
-                    // {
-                    //     sumPrice = sumPrice - elem.price - quantity;
-                    //     totalPrice.innerHTML = sumPrice;
-                    //     console.log(input.value);
-                    // }
+                    if(Number(input.value) > quantity)
+                    {
+                        item[2] = parseInt(input.value);
+                        console.log(item);
+                        sumPrice += elem.price * quantity;
+                        totalPrice.innerHTML = sumPrice;
+                        addTotalArticle();
+                    }
+                    if(Number(input.value) < quantity)
+                    {
+                        item[2] = parseInt(input.value);
+                        console.log(item);
+                        sumPrice -= elem.price - quantity;
+                        totalPrice.innerHTML = sumPrice;
+                        addTotalArticle();
+                    }
                 });
+                sumPrice += elem.price * quantity;
+                totalPrice.innerHTML = sumPrice;
                 img.src = elem.imageUrl;
                 img.setAttribute("alt", elem.altTxt);
                 h2.innerHTML = elem.name;
@@ -184,3 +183,4 @@ function addTotalArticle()
     cart.forEach(elem => sumQuantity += elem[2])
     totalArticle.innerHTML = sumQuantity;    
 }
+
