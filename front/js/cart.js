@@ -96,27 +96,29 @@ var afficherPanier = (data) =>
                 var quantity = cart[i][2];
                 var totalPrice = document.getElementById("totalPrice");
 
-                input.addEventListener("change", () => 
-                {
-                    if(input.value > quantity)
-                    {
-                        item[2] = parseInt(input.value);
-                        localStorage.setItem("cart", JSON.stringify(cart))
-                        console.log(input.value, item);
-                        sumPrice += elem.price * quantity;
-                        totalPrice.innerHTML = sumPrice;
-                        addTotalArticle();
-                    }
-                    else
-                    {
-                        item[2] = parseInt(input.value);
-                        localStorage.setItem("cart", JSON.stringify(cart))
-                        console.log(input.value, item);
-                        sumPrice -= elem.price - quantity;
-                        totalPrice.innerHTML = sumPrice;
-                        addTotalArticle();
-                    }
-                });
+input.addEventListener("change", () => 
+{
+    var value = parseInt(input.value);
+    console.log(typeof(value));
+    if(value > quantity)
+    {
+        item[2] = parseInt(input.value);
+        localStorage.setItem("cart", JSON.stringify(cart))
+        console.log(input.value, item);
+        sumPrice += elem.price * quantity;
+        totalPrice.innerHTML = sumPrice;
+        addTotalArticle();
+    }
+    else
+    {
+        item[2] = parseInt(input.value);
+        localStorage.setItem("cart", JSON.stringify(cart))
+        console.log(input.value, item);
+        sumPrice -= elem.price * quantity;
+        totalPrice.innerHTML = sumPrice;
+        addTotalArticle();
+    }
+});
                 sumPrice += elem.price * quantity;
                 totalPrice.innerHTML = sumPrice;
                 img.src = elem.imageUrl;
@@ -202,9 +204,7 @@ function formCheck()
     var order = document.getElementById("order");
     const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
     
-    order.addEventListener("click", () => 
-    {
-        console.log(specialChars.test(firstname.value));
-    });
+    
+    
 
 }
