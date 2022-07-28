@@ -100,6 +100,7 @@ var afficherPanier = (data) =>
                     if(input.value > quantity)
                     {
                         item[2] = parseInt(input.value);
+                        localStorage.setItem("cart", JSON.stringify(cart))
                         console.log(input.value, item);
                         sumPrice += elem.price * quantity;
                         totalPrice.innerHTML = sumPrice;
@@ -108,6 +109,7 @@ var afficherPanier = (data) =>
                     else
                     {
                         item[2] = parseInt(input.value);
+                        localStorage.setItem("cart", JSON.stringify(cart))
                         console.log(input.value, item);
                         sumPrice -= elem.price - quantity;
                         totalPrice.innerHTML = sumPrice;
@@ -184,3 +186,18 @@ function addTotalArticle()
     totalArticle.innerHTML = sumQuantity;    
 }
 
+function formCheck()
+{
+    var firstname = document.getElementById("firstName");
+    var firstnameErrorMsg = document.getElementById("firstNameErrorMsg");
+    var lastname = document.getElementById("lastName");
+    var lastnameErrorMsg = document.getElementById("lastNameErrorMsg");
+    var addr = document.getElementById("address");
+    var addrErrorMsg = document.getElementById("addressErrorMsg");
+    var city = document.getElementById("city");
+    var cityErrorMsg = document.getElementById("cityErrorMsg");
+    var email = document.getElementById("email");
+    var emailErrorMsg = document.getElementById("emailErrorMsg");
+
+    
+}
