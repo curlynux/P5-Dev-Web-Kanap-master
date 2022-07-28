@@ -7,10 +7,11 @@ var Data = fetch(`http://localhost:3000/api/products`)
     .then(data => 
         {
             afficherPanier(data)
-           deleEmptyArticle();
+            deleEmptyArticle();
             updateQuantity();
             deleteItem();
             addTotalArticle();
+            formCheck();
             return data;
         });  
 // var log = () => Data.then(a => console.log(a));
@@ -198,6 +199,12 @@ function formCheck()
     var cityErrorMsg = document.getElementById("cityErrorMsg");
     var email = document.getElementById("email");
     var emailErrorMsg = document.getElementById("emailErrorMsg");
-
+    var order = document.getElementById("order");
+    const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
     
+    order.addEventListener("click", () => 
+    {
+        console.log(specialChars.test(firstname.value));
+    });
+
 }
