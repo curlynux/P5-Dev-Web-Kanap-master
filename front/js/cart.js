@@ -203,8 +203,19 @@ function formCheck()
     var emailErrorMsg = document.getElementById("emailErrorMsg");
     var order = document.getElementById("order");
     const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-    
-    
-    
+    var letters = /^[A-Za-z]+$/;
+    var i = 0;
 
+    console.log(firstname);
+    firstname.addEventListener("keydown", (e) => 
+    {
+        var key = e.key;
+        if(firstname.value.match(letters))
+            console.log("firstname ok");
+        else
+        {
+            firstname.style.border = "3px solid darkred";
+            firstnameErrorMsg.innerHTML = "les caractères spéciaux ne sont pas autorisé !";
+        }
+    });
 }
