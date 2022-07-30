@@ -11,10 +11,9 @@ var Data = fetch(`http://localhost:3000/api/products`)
             updateQuantity();
             deleteItem();
             addTotalArticle();
-            formCheck();
+            checkValidity();
             return data;
         });  
-// var log = () => Data.then(a => console.log(a));
 
 var afficherPanier = (data) => 
 {
@@ -188,34 +187,121 @@ function addTotalArticle()
     cart.forEach(elem => sumQuantity += elem[2])
     totalArticle.innerHTML = sumQuantity;    
 }
+var firstname = document.getElementById("firstName");
+var firstnameErrorMsg = document.getElementById("firstNameErrorMsg");
+var lastname = document.getElementById("lastName");
+var lastnameErrorMsg = document.getElementById("lastNameErrorMsg");
+var addr = document.getElementById("address");
+var addrErrorMsg = document.getElementById("addressErrorMsg");
+var city = document.getElementById("city");
+var cityErrorMsg = document.getElementById("cityErrorMsg");
+var email = document.getElementById("email");
+var emailErrorMsg = document.getElementById("emailErrorMsg");
+var order = document.getElementById("order");
+// const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+// var letters = /^[A-Za-z]+$/;
+var i = 0;
+const regexForName = /(^[a-zA-Z][a-zA-Z\s]{0,20}[a-zA-Z]$)/;
+const regexForAddress = /^([0-9]{1,3}(([,. ]?){1}[a-zA-Zàâäéèêëïîôöùûüç' ]+))$/;
+const regexForEmail = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-function formCheck()
-{
-    var firstname = document.getElementById("firstName");
-    var firstnameErrorMsg = document.getElementById("firstNameErrorMsg");
-    var lastname = document.getElementById("lastName");
-    var lastnameErrorMsg = document.getElementById("lastNameErrorMsg");
-    var addr = document.getElementById("address");
-    var addrErrorMsg = document.getElementById("addressErrorMsg");
-    var city = document.getElementById("city");
-    var cityErrorMsg = document.getElementById("cityErrorMsg");
-    var email = document.getElementById("email");
-    var emailErrorMsg = document.getElementById("emailErrorMsg");
-    var order = document.getElementById("order");
-    const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-    var letters = /^[A-Za-z]+$/;
-    var i = 0;
+// vérification du formulaire lors de la validation
+var cartOrder = document.querySelector('.cart__order__form');
 
-    console.log(firstname);
-    firstname.addEventListener("keydown", (e) => 
-    {
-        var key = e.key;
-        if(firstname.value.match(letters))
-            console.log("firstname ok");
-        else
-        {
-            firstname.style.border = "3px solid darkred";
-            firstnameErrorMsg.innerHTML = "les caractères spéciaux ne sont pas autorisé !";
-        }
+function checkValidity() {
+    cartOrder.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (formValidation()) {
+           sendCommand();
+        } 
     });
+}
+
+function formValidation() {
+    let isValid = true;
+    if(firstname.value.trim().match(regexForName)){
+        firstname.style.border = 'solid 2px #D5FCB4';
+            firstname.style.color = '#D5FCB4';
+            firstnameErrorMsg.innerHTML = "Valide";
+    } else{
+        isValid=false;
+        firstnameErrorMsg.innerHTML = "le champ prénom est incorecte";
+            firstname.style.border = 'solid 2px red';
+            firstnameErrorMsg.style.color = '#fbbcbc';
+    }
+    if(lastname.value.trim().match(regexForName)){
+        lastname.style.border = 'solid 2px #D5FCB4';
+        lastnameErrorMsg.style.color = '#D5FCB4';
+        lastnameErrorMsg.innerHTML = "Valide";
+    } else{
+        isValid=false;
+        lastnameErrorMsg.innerHTML = "le champ nom est incorecte";
+        lastname.style.border = 'solid 2px red';
+        lastnameErrorMsg.style.color = '#fbbcbc';
+    }
+    if(addr.value.trim().match(regexForAddress)){
+        addr.style.border = 'solid 2px #D5FCB4';
+        addrErrorMsg.style.color = '#D5FCB4';
+        addrErrorMsg.innerHTML = "Valide";
+    } else{
+        isValid=false;
+        addressErrorMsg.innerHTML = "le champ address est incorecte";
+        address.style.border = 'solid 2px red';
+        addrErrorMsg.style.color = '#fbbcbc';
+    }
+    if(city.value.trim().match(regexForName)){
+        city.style.border = 'solid 2px #D5FCB4';
+        cityErrorMsg.style.color = '#D5FCB4';
+        cityErrorMsg.innerHTML = "Valide";
+    } else{
+        isValid=false;
+        cityErrorMsg.innerHTML = "le champ ville est incorecte";
+        city.style.border = 'solid 2px red';
+        cityErrorMsg.style.color = '#fbbcbc';
+    }
+    if(email.value.trim().match(regexForEmail)){
+        email.style.border = 'solid 2px #D5FCB4';
+        emailErrorMsg.style.color = '#D5FCB4';
+        emailErrorMsg.innerHTML = "Valide";
+    } else{
+        isValid=false;
+        emailErrorMsg.innerHTML = "l'email' est incorecte";
+        email.style.border = 'solid 2px red';
+        emailErrorMsg.style.color = '#fbbcbc';
+    }
+return isValid;    
+};
+
+function sendCommand() {
+    const firstNameValue = document.querySelector("#firstName").value;
+    const lastNameValue = document.querySelector("#lastName").value;
+    const addressValue = document.querySelector("#address").value;
+    const cityValue = document.querySelector("#city").value;
+    const emailValue = document.querySelector("#email").value;
+
+    const orderProducts = {
+        contact: {
+            firstname: firstNameValue,
+            lastname: lastNameValue,
+            address: addressValue,
+            city: cityValue,
+            email: emailValue
+        },
+        products: cart
+    }
+    
+    fetch('http://localhost:3000/api/products/order', {
+            method: "POST",
+            body: JSON.stringify(orderProducts),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        .then((res) => console.log(res.json()))
+        .then (data => {
+            console.log(data);
+            const orderID = data.orderId;
+            window.location = `confirmation.html?orderId=${orderID}`
+        })
+        console.log(orderProducts);   
 }
