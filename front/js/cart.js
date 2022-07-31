@@ -14,6 +14,7 @@ var Data = fetch(`http://localhost:3000/api/products`)
             checkValidity();
             return data;
         });  
+// var log = () => Data.then(a => console.log(a));
 
 var afficherPanier = (data) => 
 {
@@ -285,23 +286,21 @@ function sendCommand() {
             lastname: lastNameValue,
             address: addressValue,
             city: cityValue,
-            email: emailValue
+            email: emailValue,
         },
-        products: cart
+        products: cart,
     }
     
     fetch('http://localhost:3000/api/products/order', {
-            method: "POST",
-            body: JSON.stringify(orderProducts),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-        .then((res) => console.log(res.json()))
-        .then (data => {
-            console.log(data);
-            const orderID = data.orderId;
-            window.location = `confirmation.html?orderId=${orderID}`
-        })
-        console.log(orderProducts);   
-}
+        method: "POST",
+        body: JSON.stringify(orderProducts),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+    .then((res) => res.json())
+    .then (data => {
+        const orderID = data.orderId;
+        window.location = `confirmation.html?orderId=${orderID}`
+    })
+};
