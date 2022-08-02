@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "name": "kanap-backend",
   "version": "1.0.0",
@@ -15,3 +16,21 @@
     "ws": "^8.8.1"
   }
 }
+=======
+{
+  "name": "kanap-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "nodemon": "^2.0.16",
+    "uuid": "^3.3.2"
+  }
+}
+>>>>>>> 06770cf (quantite marche pas)

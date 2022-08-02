@@ -6,6 +6,10 @@ var Data = fetch(`http://localhost:3000/api/products`)
 .then(res => res.json())
     .then(data => 
         {
+<<<<<<< HEAD
+=======
+            console.log(data);
+>>>>>>> 06770cf (quantite marche pas)
             afficherPanier(data)
             deleEmptyArticle();
             updateQuantity();
@@ -96,6 +100,7 @@ var afficherPanier = (data) =>
                 var quantity = cart[i][2];
                 var totalPrice = document.getElementById("totalPrice");
 
+<<<<<<< HEAD
 input.addEventListener("change", () => 
 {
     var value = parseInt(input.value);
@@ -122,6 +127,11 @@ input.addEventListener("change", () =>
 });
                 sumPrice += elem.price * quantity;
                 totalPrice.innerHTML = sumPrice;
+=======
+                quantiteEtPrix();
+                // sumPrice += elem.price * quantity;
+                // totalPrice.innerHTML = sumPrice;
+>>>>>>> 06770cf (quantite marche pas)
                 img.src = elem.imageUrl;
                 img.setAttribute("alt", elem.altTxt);
                 h2.innerHTML = elem.name;
@@ -190,6 +200,7 @@ function addTotalArticle()
     totalArticle.innerHTML = sumQuantity;    
 }
 
+<<<<<<< HEAD
 
 
 function checkValidity() {
@@ -204,6 +215,36 @@ var cartOrder = document.querySelector('.cart__order__form');
 }
 
 function formValidation() {
+=======
+var quantiteEtPrix = () => 
+{
+
+    let itemQuantity = document.getElementsByClassName('itemQuantity'); 
+    let prodQuantity = itemQuantity.length; 
+    totalQuantity = 0; 
+
+    for (let j = 0; j < prodQuantity; ++j) {
+        totalQuantity += itemQuantity[j].valueAsNumber;
+    }
+
+
+    let valueQuantity = document.getElementById('totalQuantity');
+    valueQuantity.innerHTML = totalQuantity;
+
+    
+    totalPrice = 0; 
+    for (let k = 0; k < prodQuantity; ++k) {
+        let id = [...[itemQuantity[k].parentElement.parentElement.parentElement.parentElement]]
+        console.log(data[k]);
+        console.log(id[0].dataset.id); 
+        totalPrice += (itemQuantity[k].valueAsNumber * data[k].price);
+        // console.log(totalPrice);
+    }
+    let productTotalPrice = document.getElementById('totalPrice');
+    productTotalPrice.innerHTML = totalPrice;
+}
+
+>>>>>>> 06770cf (quantite marche pas)
 var firstname = document.getElementById("firstName");
 var firstnameErrorMsg = document.getElementById("firstNameErrorMsg");
 var lastname = document.getElementById("lastName");
@@ -223,6 +264,21 @@ const regexForAddress = /^([0-9]{1,3}(([,. ]?){1}[a-zA-Zàâäéèêëïîôöù
 const regexForEmail = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 // vérification du formulaire lors de la validation
+<<<<<<< HEAD
+=======
+var cartOrder = document.querySelector('.cart__order__form');
+
+function checkValidity() {
+    cartOrder.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (formValidation()) {
+           sendCommand();
+        } 
+    });
+}
+
+function formValidation() {
+>>>>>>> 06770cf (quantite marche pas)
     let isValid = true;
     if(firstname.value.trim().match(regexForName)){
         firstname.style.border = 'solid 2px #D5FCB4';
@@ -284,6 +340,7 @@ function sendCommand() {
     const cityValue = document.querySelector("#city").value;
     const emailValue = document.querySelector("#email").value;
 
+<<<<<<< HEAD
     const products = [];
     cart.forEach(elem => 
     {
@@ -293,11 +350,21 @@ function sendCommand() {
         contact: {
             firstName: firstNameValue,
             lastName: lastNameValue,
+=======
+    const orderProducts = {
+        contact: {
+            firstname: firstNameValue,
+            lastname: lastNameValue,
+>>>>>>> 06770cf (quantite marche pas)
             address: addressValue,
             city: cityValue,
             email: emailValue,
         },
+<<<<<<< HEAD
         products: products,
+=======
+        products: cart,
+>>>>>>> 06770cf (quantite marche pas)
     }
     
     fetch('http://localhost:3000/api/products/order', {
