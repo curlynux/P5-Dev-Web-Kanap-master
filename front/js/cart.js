@@ -235,10 +235,9 @@ var quantiteEtPrix = () =>
     totalPrice = 0; 
     for (let k = 0; k < prodQuantity; ++k) {
         let id = [...[itemQuantity[k].parentElement.parentElement.parentElement.parentElement]]
-        console.log(data[k]);
-        console.log(id[0].dataset.id); 
+        
         totalPrice += (itemQuantity[k].valueAsNumber * data[k].price);
-        // console.log(totalPrice);
+        console.log(totalPrice);
     }
     let productTotalPrice = document.getElementById('totalPrice');
     productTotalPrice.innerHTML = totalPrice;
