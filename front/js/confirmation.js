@@ -7,11 +7,12 @@ function getorderId() {
     const urlLoc = window.location.href;
     const url = new URL(urlLoc);
     const urlId = url.searchParams.get("orderId");
+    console.log(urlId);
     return urlId;
 }
 
 const orderId = document.getElementById('orderId');
-orderId.inneHTrML = getorderId();
+orderId.innerHTML = getorderId();
 
 // Vider le localStorage
 localStorage.clear();

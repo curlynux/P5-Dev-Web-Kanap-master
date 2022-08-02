@@ -100,24 +100,25 @@ input.addEventListener("change", () =>
 {
     var value = parseInt(input.value);
     console.log(typeof(value));
-    if(value > quantity)
-    {
+    // if(value > quantity)
+    // {
         item[2] = parseInt(input.value);
+        
         localStorage.setItem("cart", JSON.stringify(cart))
-        console.log(input.value, item);
-        sumPrice += elem.price * quantity;
+        console.log(quantity);
+        sumPrice += elem.price * (value - quantity);
         totalPrice.innerHTML = sumPrice;
         addTotalArticle();
-    }
-    else
-    {
-        item[2] = parseInt(input.value);
-        localStorage.setItem("cart", JSON.stringify(cart))
-        console.log(input.value, item);
-        sumPrice -= elem.price * quantity;
-        totalPrice.innerHTML = sumPrice;
-        addTotalArticle();
-    }
+    // }
+    // else
+    // {
+    //     item[2] = parseInt(input.value);
+    //     localStorage.setItem("cart", JSON.stringify(cart))
+    //     console.log(input.value, item);
+    //     sumPrice -= elem.price * quantity;
+    //     totalPrice.innerHTML = sumPrice;
+    //     addTotalArticle();
+    // }
 });
                 sumPrice += elem.price * quantity;
                 totalPrice.innerHTML = sumPrice;
@@ -188,6 +189,21 @@ function addTotalArticle()
     cart.forEach(elem => sumQuantity += elem[2])
     totalArticle.innerHTML = sumQuantity;    
 }
+
+
+
+function checkValidity() {
+var cartOrder = document.querySelector('.cart__order__form');
+
+    cartOrder.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (formValidation()) {
+           sendCommand();
+        } 
+    });
+}
+
+function formValidation() {
 var firstname = document.getElementById("firstName");
 var firstnameErrorMsg = document.getElementById("firstNameErrorMsg");
 var lastname = document.getElementById("lastName");
@@ -207,18 +223,6 @@ const regexForAddress = /^([0-9]{1,3}(([,. ]?){1}[a-zA-Zàâäéèêëïîôöù
 const regexForEmail = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 // vérification du formulaire lors de la validation
-var cartOrder = document.querySelector('.cart__order__form');
-
-function checkValidity() {
-    cartOrder.addEventListener("submit", (e) => {
-        e.preventDefault();
-        if (formValidation()) {
-           sendCommand();
-        } 
-    });
-}
-
-function formValidation() {
     let isValid = true;
     if(firstname.value.trim().match(regexForName)){
         firstname.style.border = 'solid 2px #D5FCB4';
@@ -280,15 +284,20 @@ function sendCommand() {
     const cityValue = document.querySelector("#city").value;
     const emailValue = document.querySelector("#email").value;
 
+    const products = [];
+    cart.forEach(elem => 
+    {
+        products.push(elem[0]);
+    });
     const orderProducts = {
         contact: {
-            firstname: firstNameValue,
-            lastname: lastNameValue,
+            firstName: firstNameValue,
+            lastName: lastNameValue,
             address: addressValue,
             city: cityValue,
             email: emailValue,
         },
-        products: cart,
+        products: products,
     }
     
     fetch('http://localhost:3000/api/products/order', {
