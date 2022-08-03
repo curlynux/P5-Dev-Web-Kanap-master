@@ -6,16 +6,14 @@ var Data = fetch(`http://localhost:3000/api/products`)
 .then(res => res.json())
     .then(data => 
         {
-<<<<<<< HEAD
-=======
-            console.log(data);
->>>>>>> 06770cf (quantite marche pas)
             afficherPanier(data)
             deleEmptyArticle();
             updateQuantity();
             deleteItem();
             addTotalArticle();
             checkValidity();
+            updateQuantity();
+            quantiteEtPrix();
             return data;
         });  
 // var log = () => Data.then(a => console.log(a));
@@ -98,40 +96,33 @@ var afficherPanier = (data) =>
                 
                 var couleur = cart[i][1];
                 var quantity = cart[i][2];
-                var totalPrice = document.getElementById("totalPrice");
 
-<<<<<<< HEAD
-input.addEventListener("change", () => 
-{
-    var value = parseInt(input.value);
-    console.log(typeof(value));
-    // if(value > quantity)
-    // {
-        item[2] = parseInt(input.value);
-        
-        localStorage.setItem("cart", JSON.stringify(cart))
-        console.log(quantity);
-        sumPrice += elem.price * (value - quantity);
-        totalPrice.innerHTML = sumPrice;
-        addTotalArticle();
-    // }
-    // else
-    // {
-    //     item[2] = parseInt(input.value);
-    //     localStorage.setItem("cart", JSON.stringify(cart))
-    //     console.log(input.value, item);
-    //     sumPrice -= elem.price * quantity;
-    //     totalPrice.innerHTML = sumPrice;
-    //     addTotalArticle();
-    // }
-});
+                // input.addEventListener("change", () => 
+                // {
+                //     var value = parseInt(input.value);
+                //     console.log(typeof(value));
+                //     // if(value > quantity)
+                //     // {
+                //         item[2] = parseInt(input.value);
+                        
+                //         localStorage.setItem("cart", JSON.stringify(cart))
+                //         console.log(cart[0]);
+                //         sumPrice += elem.price * (value - quantity);
+                //         // totalPrice.innerHTML = sumPrice;
+                //         addTotalArticle();
+                //     // }
+                //     // else
+                //     // {
+                //     //     item[2] = parseInt(input.value);
+                //     //     localStorage.setItem("cart", JSON.stringify(cart))
+                //     //     console.log(input.value, item);
+                //     //     sumPrice -= elem.price * quantity;
+                //     //     totalPrice.innerHTML = sumPrice;
+                //     //     addTotalArticle();
+                //     // }
+                // });
                 sumPrice += elem.price * quantity;
-                totalPrice.innerHTML = sumPrice;
-=======
-                quantiteEtPrix();
-                // sumPrice += elem.price * quantity;
                 // totalPrice.innerHTML = sumPrice;
->>>>>>> 06770cf (quantite marche pas)
                 img.src = elem.imageUrl;
                 img.setAttribute("alt", elem.altTxt);
                 h2.innerHTML = elem.name;
@@ -185,12 +176,6 @@ function deleteItem()
         
 }
 
-function updateQuantity()
-{
-    var article = document.getElementsByClassName("cart__item");
-    var input = document.getElementsByClassName("itemQuantity");
-}
-
 function addTotalArticle()
 {
     var sumQuantity = 0;
@@ -200,22 +185,6 @@ function addTotalArticle()
     totalArticle.innerHTML = sumQuantity;    
 }
 
-<<<<<<< HEAD
-
-
-function checkValidity() {
-var cartOrder = document.querySelector('.cart__order__form');
-
-    cartOrder.addEventListener("submit", (e) => {
-        e.preventDefault();
-        if (formValidation()) {
-           sendCommand();
-        } 
-    });
-}
-
-function formValidation() {
-=======
 var quantiteEtPrix = () => 
 {
 
@@ -232,18 +201,60 @@ var quantiteEtPrix = () =>
     valueQuantity.innerHTML = totalQuantity;
 
     
-    totalPrice = 0; 
-    for (let k = 0; k < prodQuantity; ++k) {
-        let id = [...[itemQuantity[k].parentElement.parentElement.parentElement.parentElement]]
-        
-        totalPrice += (itemQuantity[k].valueAsNumber * data[k].price);
-        console.log(totalPrice);
-    }
+    let totalPrice = 0; 
+    
+    data.forEach(elem => 
+    {
+        for (let k = 0; k < prodQuantity; ++k) 
+        {
+            let id = [...[itemQuantity[k].parentElement.parentElement.parentElement.parentElement]]
+            if(elem._id === id[0].dataset.id)
+            {
+                totalPrice += (itemQuantity[k].valueAsNumber * elem.price);
+                
+            }
+        }
+    })
+    
     let productTotalPrice = document.getElementById('totalPrice');
     productTotalPrice.innerHTML = totalPrice;
 }
 
->>>>>>> 06770cf (quantite marche pas)
+var updateQuantity = () => {
+    let qtyModif = document.querySelectorAll(".itemQuantity");
+
+
+    for (let l = 0; l < qtyModif.length; l++) {
+        qtyModif[l].addEventListener("change", (e) => {
+            e.preventDefault();
+
+
+            let quantityInputValue = qtyModif[l].valueAsNumber; // on stock la quantité reçu par la boucle dans une variable
+
+            cart[l][2] = quantityInputValue;
+
+            quantiteEtPrix() // on rappelle la fonction pour que le prix s'actualise en temps réel. 
+
+            localStorage.setItem("cart", JSON.stringify(cart)); // on modifie ou supprime la quantité dans le localStorage
+            console.log(cart[l]);
+
+        });
+    }
+}
+
+
+function checkValidity() {
+var cartOrder = document.querySelector('.cart__order__form');
+
+    cartOrder.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (formValidation()) {
+           sendCommand();
+        } 
+    });
+}
+
+function formValidation() {
 var firstname = document.getElementById("firstName");
 var firstnameErrorMsg = document.getElementById("firstNameErrorMsg");
 var lastname = document.getElementById("lastName");
@@ -263,21 +274,6 @@ const regexForAddress = /^([0-9]{1,3}(([,. ]?){1}[a-zA-Zàâäéèêëïîôöù
 const regexForEmail = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 // vérification du formulaire lors de la validation
-<<<<<<< HEAD
-=======
-var cartOrder = document.querySelector('.cart__order__form');
-
-function checkValidity() {
-    cartOrder.addEventListener("submit", (e) => {
-        e.preventDefault();
-        if (formValidation()) {
-           sendCommand();
-        } 
-    });
-}
-
-function formValidation() {
->>>>>>> 06770cf (quantite marche pas)
     let isValid = true;
     if(firstname.value.trim().match(regexForName)){
         firstname.style.border = 'solid 2px #D5FCB4';
@@ -339,7 +335,6 @@ function sendCommand() {
     const cityValue = document.querySelector("#city").value;
     const emailValue = document.querySelector("#email").value;
 
-<<<<<<< HEAD
     const products = [];
     cart.forEach(elem => 
     {
@@ -349,21 +344,11 @@ function sendCommand() {
         contact: {
             firstName: firstNameValue,
             lastName: lastNameValue,
-=======
-    const orderProducts = {
-        contact: {
-            firstname: firstNameValue,
-            lastname: lastNameValue,
->>>>>>> 06770cf (quantite marche pas)
             address: addressValue,
             city: cityValue,
             email: emailValue,
         },
-<<<<<<< HEAD
         products: products,
-=======
-        products: cart,
->>>>>>> 06770cf (quantite marche pas)
     }
     
     fetch('http://localhost:3000/api/products/order', {
@@ -378,4 +363,4 @@ function sendCommand() {
         const orderID = data.orderId;
         window.location = `confirmation.html?orderId=${orderID}`
     })
-};
+}
