@@ -25,6 +25,7 @@ var afficherProduit = (data) =>
         option.value = elem;
         option.textContent = elem;
         colors.appendChild(option);
+
     });
 
     h1.textContent = data.name;
@@ -71,6 +72,7 @@ var AjouterPanier = () =>
     var ok = false;
     cart.forEach(element => 
         {
+            
             index++;
             if (element[0] === id && !ok)
             {
@@ -78,6 +80,7 @@ var AjouterPanier = () =>
                 if (couleur === element[1])
                 {
                     element[2] = quantite + parseInt(element[2]);
+                    
                     
                 } else
                 {

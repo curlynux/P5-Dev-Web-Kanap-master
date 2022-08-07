@@ -15,9 +15,8 @@ var Data = fetch(`http://localhost:3000/api/products`)
             updateQuantity();
             quantiteEtPrix();
             return data;
-        });  
-// var log = () => Data.then(a => console.log(a));
-
+        });
+//fonction qui affiche le contenu du panier "cart" et compare les ids du panier en recuperant les ids contenu dans l'api grace a l'argument data
 var afficherPanier = (data) => 
 {
     
@@ -72,6 +71,7 @@ var afficherPanier = (data) =>
         divDesc.appendChild(color);
         divDesc.appendChild(prix);
 
+        //definition de la div contenant les parametre
         divSettings.className = "cart__item__content__settings";
         divQuantChild.className = "cart__item__content__settings__quantity";
         divContent.appendChild(divSettings);
@@ -80,12 +80,15 @@ var afficherPanier = (data) =>
         divQuantChild.appendChild(input);
         divContent.appendChild(divDelete);
 
-        input.setAttribute("type", "number");
         
+        // definition du champ de modification de quantite
+        input.setAttribute("type", "number");
         input.name = "itemQuantity";
         input.className = "itemQuantity";
         input.min = 1;
         input.max = 100;
+
+        //definition de la div contenant le bouton supprimer et le bouton supprimer lui meme
         divDelete.className = "cart__item__content__settings__delete";
         divDeletetext.className = "deleteItem";
         divDeletetext.innerHTML = "supprimer";
@@ -97,30 +100,6 @@ var afficherPanier = (data) =>
                 var couleur = cart[i][1];
                 var quantity = cart[i][2];
 
-                // input.addEventListener("change", () => 
-                // {
-                //     var value = parseInt(input.value);
-                //     console.log(typeof(value));
-                //     // if(value > quantity)
-                //     // {
-                //         item[2] = parseInt(input.value);
-                        
-                //         localStorage.setItem("cart", JSON.stringify(cart))
-                //         console.log(cart[0]);
-                //         sumPrice += elem.price * (value - quantity);
-                //         // totalPrice.innerHTML = sumPrice;
-                //         addTotalArticle();
-                //     // }
-                //     // else
-                //     // {
-                //     //     item[2] = parseInt(input.value);
-                //     //     localStorage.setItem("cart", JSON.stringify(cart))
-                //     //     console.log(input.value, item);
-                //     //     sumPrice -= elem.price * quantity;
-                //     //     totalPrice.innerHTML = sumPrice;
-                //     //     addTotalArticle();
-                //     // }
-                // });
                 sumPrice += elem.price * quantity;
                 // totalPrice.innerHTML = sumPrice;
                 img.src = elem.imageUrl;
@@ -139,6 +118,7 @@ var afficherPanier = (data) =>
 
 }
 
+// supprime les elements article vide sans image ni data
 function deleEmptyArticle()
 {
     var article = document.getElementsByClassName("cart__item")
@@ -150,6 +130,7 @@ function deleEmptyArticle()
     }
 }
 
+//supprime un article du panier
 function deleteItem()
 {
     var deleteButton = document.getElementsByClassName("deleteItem");
@@ -176,6 +157,7 @@ function deleteItem()
         
 }
 
+//cette fonction récupère la quantité et enregistre dans la variable sumQuantity le total de l'addition
 function addTotalArticle()
 {
     var sumQuantity = 0;
@@ -185,6 +167,7 @@ function addTotalArticle()
     totalArticle.innerHTML = sumQuantity;    
 }
 
+//chaque quantite est additionner ainsi que chaque prix puis enregistrer dans leur variable respective que sont totalQuantity et productTotalPrice
 var quantiteEtPrix = () => 
 {
 
@@ -220,6 +203,7 @@ var quantiteEtPrix = () =>
     productTotalPrice.innerHTML = totalPrice;
 }
 
+//la quantite est mise a jour dans le local storage ce qui met a jour la vue automatiquement, j'appel la fonction quantiteEtPrix afin de mettre a jour le prix en meme temps que la quantite modifié
 var updateQuantity = () => {
     let qtyModif = document.querySelectorAll(".itemQuantity");
 
@@ -242,7 +226,7 @@ var updateQuantity = () => {
     }
 }
 
-
+//le formulaire est soumis s'il n'y a pas d'erreur
 function checkValidity() {
 var cartOrder = document.querySelector('.cart__order__form');
 
@@ -254,6 +238,7 @@ var cartOrder = document.querySelector('.cart__order__form');
     });
 }
 
+//verifie chaque element du formulaire afin de detecter les éventuels erreurs "chiffres et caractère spéciaux" grâce a des regex
 function formValidation() {
 var firstname = document.getElementById("firstName");
 var firstnameErrorMsg = document.getElementById("firstNameErrorMsg");
@@ -266,8 +251,6 @@ var cityErrorMsg = document.getElementById("cityErrorMsg");
 var email = document.getElementById("email");
 var emailErrorMsg = document.getElementById("emailErrorMsg");
 var order = document.getElementById("order");
-// const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
-// var letters = /^[A-Za-z]+$/;
 var i = 0;
 const regexForName = /(^[a-zA-Z][a-zA-Z\s]{0,20}[a-zA-Z]$)/;
 const regexForAddress = /^([0-9]{1,3}(([,. ]?){1}[a-zA-Zàâäéèêëïîôöùûüç' ]+))$/;
@@ -328,6 +311,7 @@ const regexForEmail = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-
 return isValid;    
 };
 
+//chaque valeur d'element du formulaire est récupérer et chaque article du panier puos envoyer vers la route order grâce a une requête de type POST
 function sendCommand() {
     const firstNameValue = document.querySelector("#firstName").value;
     const lastNameValue = document.querySelector("#lastName").value;
